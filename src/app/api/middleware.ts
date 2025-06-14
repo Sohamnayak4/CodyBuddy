@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
       },
     });
 
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Invalid token" },
       { status: 401 }

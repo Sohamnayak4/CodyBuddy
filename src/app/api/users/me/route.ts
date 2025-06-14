@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { verifyToken, getUserFromToken } from "@/lib/auth";
+import { getUserFromToken } from "@/lib/auth";
 
 export async function GET(request: Request) {
   try {

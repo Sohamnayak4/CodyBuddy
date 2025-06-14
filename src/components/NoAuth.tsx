@@ -142,7 +142,7 @@ export default function NoAuth() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">LeetCode</h2>
                 <p className="text-gray-600 mb-4">
                   Track your LeetCode problem-solving history, submission activities, and see detailed statistics
-                  about the types of problems you've solved.
+                  about the types of problems you&apos;ve solved.
                 </p>
                 <div className="text-sm text-gray-500 mt-4">
                   <span className="font-medium">Supported features:</span>
