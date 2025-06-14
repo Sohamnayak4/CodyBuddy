@@ -5,9 +5,10 @@ import { deleteUser, findUserById, updateUser } from "@/models/user";
 // Get specific user profile
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     const token = request.headers.get("Authorization")?.split(" ")[1];
     
     if (!token) {
@@ -21,7 +22,7 @@ export async function GET(
     await getUserFromToken(token);
 
     // Get requested user profile
-    const user = await findUserById(context.params.id);
+    const user = await findUserById(id);
     
     if (!user) {
       return NextResponse.json(
@@ -49,9 +50,10 @@ export async function GET(
 // Update specific user profile
 export async function PUT(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     const token = request.headers.get("Authorization")?.split(" ")[1];
     
     if (!token) {
@@ -65,7 +67,7 @@ export async function PUT(
     const authUser = await getUserFromToken(token);
     
     // Only allow users to update their own profile
-    if (authUser._id.toString() !== context.params.id) {
+    if (authUser._id.toString() !== id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 403 }
@@ -75,12 +77,12 @@ export async function PUT(
     const body = await request.json();
 
     // Update user
-    await updateUser(context.params.id, {
+    await updateUser(id, {
       name: body.name || authUser.name,
       email: body.email || authUser.email
     });
 
-    const updatedUser = await findUserById(context.params.id);
+    const updatedUser = await findUserById(id);
 
     return NextResponse.json({
       user: {
@@ -101,9 +103,10 @@ export async function PUT(
 // Delete specific user
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params;
     const token = request.headers.get("Authorization")?.split(" ")[1];
     
     if (!token) {
@@ -117,14 +120,14 @@ export async function DELETE(
     const authUser = await getUserFromToken(token);
     
     // Only allow users to delete their own account
-    if (authUser._id.toString() !== context.params.id) {
+    if (authUser._id.toString() !== id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 403 }
       );
     }
 
-    await deleteUser(context.params.id);
+    await deleteUser(id);
 
     return NextResponse.json({
       message: "User account deleted successfully"

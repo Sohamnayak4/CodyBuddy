@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  context: { params: { username: string } }
+  context: { params: Promise<{ username: string }> }
 ) {
   try {
-    const username = context.params.username;
+    const { username } = await context.params;
     
     // Fetch data from the CodeChef API
     const response = await fetch(`https://codechef-api.vercel.app/handle/${username}`);

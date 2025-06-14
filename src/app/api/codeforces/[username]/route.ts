@@ -3,9 +3,10 @@ import { CodeforcesSubmission, CodeforcesUserData } from "@/types/codeforces";
 
 export async function GET(
   request: Request,
-  context: { params: { username: string } }
+  context: { params: Promise<{ username: string }> }
 ) {
-  const handle = context.params.username;
+  const { username } = await context.params;
+  const handle = username;
 
   try {
     // Fetch user info

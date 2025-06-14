@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  context: { params: { username: string } }
+  context: { params: Promise<{ username: string }> }
 ) {
-  const username = context.params.username;
+  const { username } = await context.params;
 
   try {
     const response = await fetch(`https://leetcode-api-faisalshohag.vercel.app/${username}`);
