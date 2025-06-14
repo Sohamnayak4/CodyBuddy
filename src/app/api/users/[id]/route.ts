@@ -5,7 +5,7 @@ import { deleteUser, findUserById, updateUser } from "@/models/user";
 // Get specific user profile
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const token = request.headers.get("Authorization")?.split(" ")[1];
@@ -21,7 +21,7 @@ export async function GET(
     await getUserFromToken(token);
 
     // Get requested user profile
-    const user = await findUserById(params.id);
+    const user = await findUserById(context.params.id);
     
     if (!user) {
       return NextResponse.json(
@@ -49,7 +49,7 @@ export async function GET(
 // Update specific user profile
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const token = request.headers.get("Authorization")?.split(" ")[1];
@@ -65,7 +65,7 @@ export async function PUT(
     const authUser = await getUserFromToken(token);
     
     // Only allow users to update their own profile
-    if (authUser._id.toString() !== params.id) {
+    if (authUser._id.toString() !== context.params.id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 403 }
@@ -75,12 +75,12 @@ export async function PUT(
     const body = await request.json();
 
     // Update user
-    await updateUser(params.id, {
+    await updateUser(context.params.id, {
       name: body.name || authUser.name,
       email: body.email || authUser.email
     });
 
-    const updatedUser = await findUserById(params.id);
+    const updatedUser = await findUserById(context.params.id);
 
     return NextResponse.json({
       user: {
@@ -101,7 +101,7 @@ export async function PUT(
 // Delete specific user
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const token = request.headers.get("Authorization")?.split(" ")[1];
@@ -117,14 +117,14 @@ export async function DELETE(
     const authUser = await getUserFromToken(token);
     
     // Only allow users to delete their own account
-    if (authUser._id.toString() !== params.id) {
+    if (authUser._id.toString() !== context.params.id) {
       return NextResponse.json(
         { error: "Unauthorized" },
         { status: 403 }
       );
     }
 
-    await deleteUser(params.id);
+    await deleteUser(context.params.id);
 
     return NextResponse.json({
       message: "User account deleted successfully"
