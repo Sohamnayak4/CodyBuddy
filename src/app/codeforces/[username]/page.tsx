@@ -36,7 +36,7 @@ const TagsChart = ({
     .sort((a, b) => b[1] - a[1])
     .slice(0, 10); // Show top 10 tags
   
-  const maxCount = Math.max(...sortedTags.map(([_, count]) => count));
+  const maxCount = Math.max(...sortedTags.map(([, count]) => count));
   
   // Generate a color for each tag (using a consistent color scheme)
   const getTagColor = (index: number) => {
@@ -97,7 +97,7 @@ const RatingDistributionChart = ({
     .sort((a, b) => (a[0] as number) - (b[0] as number));
   
   // Find the max count for scaling
-  const maxCount = Math.max(...sortedRatings.map(([_, count]) => count as number));
+  const maxCount = Math.max(...sortedRatings.map(([, count]) => count as number));
   
   // Color mapping for different ratings with gradient effect
   const getRatingColor = (rating: number) => {

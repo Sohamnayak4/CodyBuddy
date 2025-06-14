@@ -10,7 +10,6 @@ import LeetCodeSummary from "@/components/LeetCodeSummary";
 import CodeforcesSummary from "@/components/CodeforcesSummary";
 import CodeChefSummary from "@/components/CodeChefSummary";
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
 
 // Key for storing connected accounts in localStorage
 const LEETCODE_USERNAME_KEY = 'codybuddy_leetcode_username';
@@ -19,7 +18,6 @@ const CODECHEF_USERNAME_KEY = 'codybuddy_codechef_username';
 
 export default function Home() {
   const { user, loading } = useAuth();
-  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [isLeetcodeModalOpen, setIsLeetcodeModalOpen] = useState(false);
   const [isCodeforcesModalOpen, setIsCodeforcesModalOpen] = useState(false);

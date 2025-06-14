@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getUserFromToken } from "@/lib/auth";
-import { findUserById, findUserByEmail, updateUser, deleteUser } from "@/models/user";
+import { findUserByEmail, updateUser, deleteUser } from "@/models/user";
 
 // Get user profile
 export async function GET(request: Request) {

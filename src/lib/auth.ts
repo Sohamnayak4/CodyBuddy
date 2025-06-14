@@ -25,7 +25,7 @@ export async function generateToken(userId: string): Promise<string> {
     .sign(JWT_SECRET);
 }
 
-export async function verifyToken(token: string) {
+async function verifyToken(token: string) {
   try {
     const verified = await jwtVerify(token, JWT_SECRET);
     return verified.payload as { userId: string };
