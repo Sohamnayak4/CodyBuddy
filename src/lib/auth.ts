@@ -29,7 +29,7 @@ export async function verifyToken(token: string) {
   try {
     const verified = await jwtVerify(token, JWT_SECRET);
     return verified.payload as { userId: string };
-  } catch (error) {
+  } catch {
     throw new Error("Invalid token");
   }
 }

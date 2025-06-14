@@ -39,9 +39,9 @@ export default function ConnectCodeforcesModal({
       
       // Successfully connected
       onConnected(username);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error connecting Codeforces account:', err);
-      setError(err.message || 'Failed to connect Codeforces account. Please check the handle and try again.');
+      setError(err instanceof Error ? err.message : 'Failed to connect Codeforces account. Please check the handle and try again.');
     } finally {
       setLoading(false);
     }

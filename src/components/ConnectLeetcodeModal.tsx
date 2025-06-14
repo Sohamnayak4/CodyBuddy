@@ -38,9 +38,9 @@ export default function ConnectLeetcodeModal({
       
       // Successfully connected
       onConnected(username);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error connecting LeetCode account:', err);
-      setError(err.message || 'Failed to connect LeetCode account. Please check the username and try again.');
+      setError(err instanceof Error ? err.message : 'Failed to connect LeetCode account. Please check the username and try again.');
     } finally {
       setLoading(false);
     }

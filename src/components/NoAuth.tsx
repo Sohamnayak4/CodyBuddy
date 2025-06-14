@@ -109,7 +109,7 @@ export default function NoAuth() {
                 },
                 {
                   title: "Progress Tracking",
-                  description: "Track your solving history and see how you're improving over time."
+                  description: "Track your solving history and see how you&apos;re improving over time."
                 },
                 {
                   title: "Problem Recommendations",
