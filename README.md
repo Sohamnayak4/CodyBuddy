@@ -1,3 +1,17 @@
+## CodyBuddy – Competitive Programming Dashboard
+
+**CodyBuddy** is a full-stack web application that lets you **aggregate and track your competitive-programming progress** across multiple platforms – Codeforces, LeetCode and CodeChef – in one place.  
+Users can:
+
+* Create an account or sign in via JWT-based authentication.
+* Connect their individual handles for each supported platform.
+* View a personalised dashboard with rating history, solved-problem stats and latest contest results.
+* Manage their profile details straight from the UI (update or permanently delete the account).
+
+The app is built with **Next.js (App Router)** on the frontend and lightweight REST endpoints (under `/api/*`) on the backend, backed by **MongoDB** for persistence.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
